@@ -76,11 +76,11 @@ Execute the compiled script with:
 node ./dist/fetchUsers.js
 
 
-Install the Axios HTTP client library to emulate
-internal API calls:
+npm i node-fetch
+npm i fetch-cookie
 
-npm install axios
-
+npm install jsdom
+npm install --save-dev @types/jsdom
 
 Cookies in the request header:
 

@@ -39,6 +39,7 @@ function fetchUsersAndSettings(userInfo) {
         }
         const loginCredentials = Object.assign({ nonce }, credentials);
         // console.log('\nloginCredentials:', loginCredentials);
+        // Perform a user login in order to access user data and settings.
         yield login(fetchWithCookies, loginCredentials);
         return Promise.all([
             fetchUsers(fetchWithCookies, loginCredentials),
@@ -68,12 +69,14 @@ function login(fetchFn, credentials) {
         const response = yield fetchFn(`${SUNVOY_API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(credentials).toString(),
+            body: new URLSearchParams(credentials).toString()
         });
         if (!response.ok) {
             throw new Error(`Login failed: ${response.status} ${response.statusText}`);
         }
-        return response;
+        else {
+            console.log('Login successful.');
+        }
     });
 }
 function fetchUsers(fetchFn, credentials) {

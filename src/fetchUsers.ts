@@ -69,6 +69,7 @@ async function fetchUsersAndSettings(userInfo: UserInfo) {
 
 	// console.log('\nloginCredentials:', loginCredentials);
 
+  // Perform a user login in order to access user data and settings.
   await login(fetchWithCookies, loginCredentials);
 
   return Promise.all([
@@ -104,14 +105,14 @@ async function login(
   const response = await fetchFn(`${SUNVOY_API_URL}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(credentials).toString(),
+    body: new URLSearchParams(credentials).toString()
   });
 
   if (!response.ok) {
     throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+  }else{
+    console.log('Login successful.');
   }
-
-  return response;
 }
 
 async function fetchUsers(
